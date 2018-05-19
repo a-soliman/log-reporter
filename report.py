@@ -4,6 +4,9 @@ DBNAME = "news"
 
 
 def get_most_popular_articles():
+    '''
+    returns a list of the 3 most popular articles,an the views for each.
+    '''
     db      = psycopg2.connect(database=DBNAME)
     cursor  = db.cursor()
     query   = """SELECT
@@ -21,6 +24,9 @@ def get_most_popular_articles():
 
 
 def get_most_popular_authors():
+    '''
+    returns a list of the most popualr authors and the total views per each.
+    '''
     db      = psycopg2.connect(database=DBNAME)
     cursor  = db.cursor()
     query   = """SELECT
@@ -41,6 +47,9 @@ def get_most_popular_authors():
 
 
 def get_error_per_day():
+    '''
+    returns a list of the days where over 1% error rate occurred, and the % per each.
+    '''
     db      = psycopg2.connect(database=DBNAME)
     cursor  = db.cursor()
     query   = """SELECT
@@ -64,6 +73,9 @@ def get_error_per_day():
 
 
 def report():
+    '''
+    Prints the opener and closer lines and calls the printer function.
+    '''
     print('='*20 + ' REPORT START ' + '='*20)
     printer('articles', get_most_popular_articles())
     printer('authors', get_most_popular_authors())
@@ -72,6 +84,12 @@ def report():
 
 
 def printer(_type, data_array):
+    '''
+    Prints the data to the console.
+    Args: 
+        1. _type: str.
+        2. data_array: a list of tuples.
+    '''
     title   = ''
     dash    = ' :==> '
     ending  = ''
